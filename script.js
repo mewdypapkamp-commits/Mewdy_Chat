@@ -1,16 +1,26 @@
+const chat = document.getElementById("chat");
+const nameInput = document.getElementById("username");
+const msgInput = document.getElementById("message");
+const sendBtn = document.getElementById("send");
+
 function sendMessage() {
-    const name = document.getElementById("username").value.trim();
-    const message = document.getElementById("message").value.trim();
-    const chat = document.getElementById("chat");
+    const name = nameInput.value.trim();
+    const msg = msgInput.value.trim();
 
-    if (name === "" || message === "") return;
+    if (!name || !msg) return;
 
-    const msgDiv = document.createElement("div");
-    msgDiv.className = "message";
-    msgDiv.innerHTML = `<span>${name}:</span> ${message}`;
+    const div = document.createElement("div");
+    div.className = "message";
+    div.innerHTML = `<b>${name}:</b> ${msg}`;
 
-    chat.appendChild(msgDiv);
-
+    chat.appendChild(div);
     chat.scrollTop = chat.scrollHeight;
-    document.getElementById("message").value = "";
+
+    msgInput.value = "";
 }
+
+sendBtn.addEventListener("click", sendMessage);
+
+msgInput.addEventListener("keydown", (e) => {
+    if (e.key === "Enter") sendMessage();
+});
