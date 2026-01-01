@@ -13,31 +13,6 @@ header{
   position: relative;
   border-bottom:2px solid green;
 }
-.buttons {
-  position: absolute;
-  right: 15px;
-  display: flex;
-  gap: 10px;
-  
-}
-.buttons a{
-    border:2px solid black;
-}
-
-.buttons a , button {
-  background: #ccc;
-  padding: 5px 12px;
-  border-radius: 10px;
-  cursor: pointer;
-}
-.buttons a:hover{
-    background-color: black;
-    color: white;
-}
-.buttons button:hover{
-    background-color: black;
-    color: white;
-}
 footer{
     background:#e5e5e5 ;
     height: 50px;
