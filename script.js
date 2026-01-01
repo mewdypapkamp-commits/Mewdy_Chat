@@ -1,14 +1,17 @@
-// 🔥 Firebase config
+
+// 🔥 Firebase config (ВСТАВЬ СВОЙ)
 const firebaseConfig = {
-  apiKey: "ТВОЙ_API_KEY",
-  authDomain: "ТВОЙ_AUTH_DOMAIN",
-  databaseURL: "ТВОЙ_DATABASE_URL",
-  projectId: "ТВОЙ_PROJECT_ID",
-  storageBucket: "ТВОЙ_STORAGE",
-  messagingSenderId: "ТВОЙ_SENDER_ID",
-  appId: "ТВОЙ_APP_ID"
+  apiKey: "AIzaSyAez-DASdgHDoHlfU1lPu6QlgOUCHv7tGE",
+  authDomain: "mewdychats.firebaseapp.com",
+  databaseURL: "https://mewdychats-default-rtdb.europe-west1.firebasedatabase.app",
+  projectId: "mewdychats",
+  storageBucket: "mewdychats.firebasestorage.app",
+  messagingSenderId: "297493755800",
+  appId: "1:297493755800:web:bc814f25e9b4f3588a1ded",
+  measurementId: "G-W19BCQ8LED"
 };
 
+// init firebase
 firebase.initializeApp(firebaseConfig);
 
 const db = firebase.database();
@@ -24,6 +27,7 @@ const sendBtn = document.getElementById("send");
 function sendMessage() {
     const name = nameInput.value.trim();
     const text = msgInput.value.trim();
+
     if (!name || !text) return;
 
     chatRef.push({
@@ -34,7 +38,12 @@ function sendMessage() {
     msgInput.value = "";
 }
 
-sendBtn.onclick = sendMessage;
+sendBtn.addEventListener("click", sendMessage);
+
+// Enter
+msgInput.addEventListener("keydown", (e) => {
+    if (e.key === "Enter") sendMessage();
+});
 
 // получение сообщений
 chatRef.limitToLast(100).on("child_added", (snapshot) => {
