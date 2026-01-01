@@ -1,5 +1,4 @@
-
-// 🔥 Firebase config (ВСТАВЬ СВОЙ)
+// Firebase config
 const firebaseConfig = {
   apiKey: "AIzaSyAez-DASdgHDoHlfU1lPu6QlgOUCHv7tGE",
   authDomain: "mewdychats.firebaseapp.com",
@@ -11,7 +10,6 @@ const firebaseConfig = {
   measurementId: "G-W19BCQ8LED"
 };
 
-// init firebase
 firebase.initializeApp(firebaseConfig);
 
 const db = firebase.database();
@@ -23,13 +21,22 @@ const nameInput = document.getElementById("username");
 const msgInput = document.getElementById("message");
 const sendBtn = document.getElementById("send");
 
-// отправка
+// 🔥 ОТПРАВКА
 function sendMessage() {
     const name = nameInput.value.trim();
     const text = msgInput.value.trim();
 
     if (!name || !text) return;
 
+    // 🔴 СЕКРЕТНАЯ КОМАНДА ОЧИСТКИ
+    if (name === "ClearChats" && text === "1746284859274758clear") {
+        chatRef.remove();        // удаляет ВСЕ сообщения
+        chat.innerHTML = "";     // очищает экран
+        msgInput.value = "";
+        return;
+    }
+
+    // обычное сообщение
     chatRef.push({
         name: name,
         text: text
@@ -45,7 +52,7 @@ msgInput.addEventListener("keydown", (e) => {
     if (e.key === "Enter") sendMessage();
 });
 
-// получение сообщений
+// 📩 ПОЛУЧЕНИЕ СООБЩЕНИЙ
 chatRef.limitToLast(100).on("child_added", (snapshot) => {
     const data = snapshot.val();
 
@@ -55,4 +62,11 @@ chatRef.limitToLast(100).on("child_added", (snapshot) => {
 
     chat.appendChild(div);
     chat.scrollTop = chat.scrollHeight;
+});
+
+// 🧹 ЕСЛИ ЧАТ ОЧИСТИЛИ — ОБНОВИТЬ ЭКРАН
+chatRef.on("value", (snapshot) => {
+    if (!snapshot.exists()) {
+        chat.innerHTML = "";
+    }
 });
