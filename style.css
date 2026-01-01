@@ -4,12 +4,55 @@ body {
     background: #111;
     color: white;
 }
+header{
+  background: #e5e5e5;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  border-bottom:2px solid green;
+}
+.buttons {
+  position: absolute;
+  right: 15px;
+  display: flex;
+  gap: 10px;
+  
+}
+.buttons a{
+    border:2px solid black;
+}
+
+.buttons a , button {
+  background: #ccc;
+  padding: 5px 12px;
+  border-radius: 10px;
+  cursor: pointer;
+}
+.buttons a:hover{
+    background-color: black;
+    color: white;
+}
+.buttons button:hover{
+    background-color: black;
+    color: white;
+}
+footer{
+    background:#e5e5e5 ;
+    height: 50px;
+    text-align: center;
+}
+footer p{
+    position: absolute;
+}
 
 .chat-container {
     display: grid;
     grid-template-columns: 1fr 220px;
     grid-template-rows: 1fr 70px;
     height: 100vh;
+    background: #ffffff;
 }
 
 .chat-window {
