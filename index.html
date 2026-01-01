@@ -2,30 +2,33 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <title>Firebase Chat</title>
+    <title>Mewdy_Chat</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
+ <header>
+    <h1>Mewdy_Chats</h1>
+    <div class="buttons">
+      <a href="#">Rule</a>
+      <button>⚙</button>
+    </div>
+  </header>
 <main class="chat-container">
-
     <div id="chat" class="chat-window"></div>
 
     <div class="side-panel">
-        <input type="text" id="username" placeholder="Имя">
+        <input type="text" id="username" placeholder="Name">
     </div>
-
     <div class="bottom-panel">
-        <input type="text" id="message" placeholder="Сообщение">
-        <button id="send">Отправить</button>
+        <input type="text" id="message" placeholder="Mesage">
+        <button id="send">Enter</button>
     </div>
-
 </main>
-
-<!-- ❗ Firebase v8 (ОБЯЗАТЕЛЬНО) -->
+     <footer>
+      <p>Mewdy_Chats version: none</p>
+  </footer>
 <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
 <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
-
 <script src="script.js"></script>
 </body>
 </html>
