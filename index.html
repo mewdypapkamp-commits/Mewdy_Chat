@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Чат</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<main class="chat-container">
+
+    <!-- Окно чата -->
+    <div id="chat" class="chat-window"></div>
+
+    <!-- Правая панель -->
+    <div class="side-panel">
+        <input type="text" id="username" placeholder="Ваше имя">
+    </div>
+
+    <!-- Нижняя панель -->
+    <div class="bottom-panel">
+        <input type="text" id="message" placeholder="Введите сообщение">
+        <button onclick="sendMessage()">Отправить</button>
+    </div>
+
+</main>
+
+<script src="script.js"></script>
+</body>
+</html>
