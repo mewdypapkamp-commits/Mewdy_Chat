@@ -12,14 +12,12 @@ body {
     height: 100vh;
 }
 
-/* ЧАТ */
 .chat-window {
     padding: 10px;
     overflow-y: auto;
     background: #1c1c1c;
 }
 
-/* СООБЩЕНИЕ */
 .message {
     margin-bottom: 6px;
 }
@@ -28,7 +26,6 @@ body {
     color: #4da6ff;
 }
 
-/* ПРАВАЯ ПАНЕЛЬ */
 .side-panel {
     padding: 10px;
     background: #181818;
@@ -42,7 +39,6 @@ body {
     color: white;
 }
 
-/* НИЖНЯЯ ПАНЕЛЬ */
 .bottom-panel {
     grid-column: 1 / 3;
     display: flex;
