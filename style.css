@@ -12,6 +12,7 @@ header{
   justify-content: center;
   position: relative;
   border-bottom:2px solid green;
+  color: green;
 }
 .buttons {
   position: absolute;
