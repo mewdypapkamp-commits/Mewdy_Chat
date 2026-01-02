@@ -12,7 +12,7 @@ header{
   justify-content: center;
   position: relative;
   border-bottom:2px solid green;
-  color: green;
+  color: black;
 }
 header p{
     position: absolute;
