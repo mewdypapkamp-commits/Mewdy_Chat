@@ -17,6 +17,7 @@ header{
 header p{
     position: absolute;
     color: black;
+    left:5px;
 }
 .buttons {
   position: absolute;
