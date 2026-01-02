@@ -52,6 +52,8 @@ footer p{
     grid-template-columns: 1fr 220px;
     grid-template-rows: 1fr 70px;
     height: 100vh;
+}
+main{
     background: #ffffff;
 }
 
