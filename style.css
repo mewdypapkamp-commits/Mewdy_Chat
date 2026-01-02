@@ -14,6 +14,10 @@ header{
   border-bottom:2px solid green;
   color: green;
 }
+header p{
+    position: absolute;
+    color: black;
+}
 .buttons {
   position: absolute;
   right: 15px;
@@ -38,14 +42,6 @@ header{
 .buttons button:hover{
     background-color: black;
     color: white;
-}
-footer{
-    background:#e5e5e5 ;
-    height: 50px;
-    text-align: center;
-}
-footer p{
-    position: absolute;
 }
 
 .chat-container {
