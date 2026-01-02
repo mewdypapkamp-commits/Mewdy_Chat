@@ -4,10 +4,9 @@ const firebaseConfig = {
   authDomain: "mewdychats.firebaseapp.com",
   databaseURL: "https://mewdychats-default-rtdb.europe-west1.firebasedatabase.app",
   projectId: "mewdychats",
-  storageBucket: "mewdychats.firebasestorage.app",
+  storageBucket: "mewdychats.appspot.com", 
   messagingSenderId: "297493755800",
-  appId: "1:297493755800:web:bc814f25e9b4f3588a1ded",
-  measurementId: "G-W19BCQ8LED"
+  appId: "1:297493755800:web:bc814f25e9b4f3588a1ded"
 };
 
 firebase.initializeApp(firebaseConfig);
