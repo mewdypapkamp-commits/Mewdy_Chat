@@ -51,7 +51,7 @@ msgInput.addEventListener("keydown", (e) => {
     if (e.key === "Enter") sendMessage();
 });
 
-//  ПОЛУЧЕНИЕ СООБЩЕНИЙ
+//  Mesage
 chatRef.limitToLast(100).on("child_added", (snapshot) => {
     const data = snapshot.val();
 
