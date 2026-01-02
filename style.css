@@ -80,7 +80,6 @@ main{
     width: 100%;
     padding: 8px;
     background: #222;
-    border: none;
     color: white;
 }
 
@@ -103,6 +102,5 @@ main{
     margin-left: 10px;
     padding: 8px 16px;
     background: #4da6ff;
-    border: none;
     cursor: pointer;
 }
