@@ -91,3 +91,11 @@ main{
     background: #4da6ff;
     cursor: pointer;
 }
+#imgBtn {
+    margin-left: 6px;
+    padding: 8px 12px;
+    background: #333;
+    border: none;
+    cursor: pointer;
+    color: white;
+}
