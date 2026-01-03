@@ -1,0 +1,101 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: #111;
+  color: white;
+  font-family: Arial, sans-serif;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* HEADER */
+header {
+  background: #e5e5e5;
+  color: black;
+  padding: 10px;
+  text-align: center;
+  position: relative;
+}
+
+header h1 {
+  margin: 5px 0;
+}
+
+.version {
+  position: absolute;
+  left: 10px;
+  top: 10px;
+  font-size: 12px;
+}
+
+.rule-btn {
+  position: absolute;
+  right: 10px;
+  top: 8px;
+  text-decoration: none;
+  padding: 5px 10px;
+  background: #ccc;
+  border-radius: 8px;
+  color: black;
+}
+
+/* NAME */
+.name-box {
+  padding: 8px;
+  background: #181818;
+}
+
+.name-box input {
+  width: 100%;
+  padding: 10px;
+  background: #222;
+  border: none;
+  color: white;
+  border-radius: 8px;
+}
+
+/* CHAT */
+.chat {
+  flex: 1;
+  padding: 10px;
+  overflow-y: auto;
+  background: #1c1c1c;
+}
+
+.message {
+  margin-bottom: 8px;
+  word-wrap: break-word;
+}
+
+.message b {
+  color: #4da6ff;
+}
+
+/* INPUT */
+.input-bar {
+  display: flex;
+  padding: 8px;
+  background: #181818;
+  gap: 6px;
+}
+
+.input-bar input {
+  flex: 1;
+  padding: 10px;
+  background: #222;
+  border: none;
+  color: white;
+  border-radius: 8px;
+}
+
+.input-bar button {
+  padding: 10px 16px;
+  background: #4da6ff;
+  border: none;
+  border-radius: 8px;
+  font-size: 18px;
+}
