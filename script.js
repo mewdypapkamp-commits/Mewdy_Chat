@@ -1,3 +1,4 @@
+// Firebase
 const firebaseConfig = {
   apiKey: "AIzaSyAez-DASdgHDoHlfU1lPu6QlgOUCHv7tGE",
   authDomain: "mewdychats.firebaseapp.com",
@@ -13,34 +14,48 @@ const db = firebase.database();
 const chatRef = db.ref("messages");
 const auth = firebase.auth();
 
+// элементы
 const chat = document.getElementById("chat");
 const nameInput = document.getElementById("username");
 const msgInput = document.getElementById("message");
 const sendBtn = document.getElementById("send");
 
+// 🔐 АНОНИМНЫЙ ВХОД
 let currentUID = null;
-auth.signInAnonymously().then((user) => {
+let isAdmin = false;
+const ADMIN_UID = "Ngr2rPIextdZfGJm8dD3dTyVVg92"; // <-- твой UID
+
+auth.signInAnonymously().then(user => {
     currentUID = user.user.uid;
+    isAdmin = currentUID === ADMIN_UID;
     console.log("Ваш UID:", currentUID);
+    if(isAdmin) console.log("Вы админ ✅");
 });
 
-const ADMIN_UID = "Ngr2rPIextdZfGJm8dD3dTyVVg92"; // <-- замените на свой UID
-
+// ==================
+// ОТПРАВКА
+// ==================
 function sendMessage() {
     const name = nameInput.value.trim();
     const text = msgInput.value.trim();
     if (!name || !text) return;
 
-    if (text === "/clear") {
-        if (currentUID === ADMIN_UID) {
-            chatRef.remove();
-            msgInput.value = "";
+    const cleanText = text.trim();
+
+    // 🔹 Очистка только для админа
+    if (cleanText === "/clear") {
+        if(isAdmin){
+            chatRef.remove()
+            .then(() => console.log("Чат очищен админом"))
+            .catch(err => console.error("Ошибка очистки:", err));
         } else {
             alert("Только админ может очистить чат!");
         }
+        msgInput.value = "";
         return;
     }
 
+    // обычное сообщение
     chatRef.push({
         name: name,
         text: text,
@@ -53,11 +68,15 @@ function sendMessage() {
 sendBtn.onclick = sendMessage;
 msgInput.addEventListener("keydown", e => { if(e.key === "Enter") sendMessage(); });
 
+// ==================
+// ПОЛУЧЕНИЕ СООБЩЕНИЙ
+// ==================
 chatRef.limitToLast(100).on("child_added", snap => {
     const data = snap.val();
     const div = document.createElement("div");
     div.className = "message";
 
+    // img: обработка
     if (data.text.startsWith("img:")) {
         const url = data.text.slice(4).trim();
         div.innerHTML = `<b>${data.name}:</b><br>
@@ -70,4 +89,9 @@ chatRef.limitToLast(100).on("child_added", snap => {
     chat.scrollTop = chat.scrollHeight;
 });
 
-chatRef.on("value", snap => { if (!snap.exists()) chat.innerHTML = ""; });
+// ==================
+// ЕСЛИ ЧАТ ОЧИЩЕН
+// ==================
+chatRef.on("value", snap => {
+    if (!snap.exists()) chat.innerHTML = "";
+});
