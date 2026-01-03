@@ -4,58 +4,98 @@ body {
     background: #111;
     color: white;
 }
-
-.chat-container {
-    max-width: 500px;
-    margin: 20px auto;
-    display: flex;
-    flex-direction: column;
-    height: 90vh;
+header{
+  background: #e5e5e5;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  border-bottom:2px solid green;
+  color: black;
 }
-
-.chat {
-    flex: 1;
-    background: #1e1e1e;
+header p{
+    position: absolute;
+    color: black;
+    left:5px;
+}
+.buttons {
+  position: absolute;
+  right: 15px;
+  display: flex;
+  gap: 10px;
+}
+.buttons a{
+    border:2px solid black;
+}
+.buttons a , button {
+  background: #ccc;
+  padding: 5px 12px;
+  border-radius: 10px;
+  cursor: pointer;
+}
+.buttons a:hover{
+    background-color: black;
+    color: white;
+}
+.buttons button:hover{
+    background-color: black;
+    color: white;
+}
+.chat-container {
+    display: grid;
+    grid-template-columns: 1fr 220px;
+    grid-template-rows: 1fr 70px;
+    height: 100vh;
+}
+main{
+    background: #ffffff;
+}
+.chat-window {
     padding: 10px;
     overflow-y: auto;
-    border-radius: 10px;
+    background: #1c1c1c;
 }
-
 .message {
-    margin-bottom: 8px;
-    word-wrap: break-word;
+    margin-bottom: 6px;
 }
-
-#username, #message {
+.message b {
+    color: #4da6ff;
+}
+.side-panel {
     padding: 10px;
-    border: none;
-    outline: none;
-    border-radius: 8px;
-    margin-top: 5px;
+    background: #181818;
+}
+.side-panel input {
+    width: 100%;
+    padding: 8px;
     background: #222;
     color: white;
 }
-
-.bottom {
+.bottom-panel {
+    grid-column: 1 / 3;
     display: flex;
-    gap: 5px;
+    padding: 10px;
+    background: #181818;
 }
-
-#message {
+.bottom-panel input {
     flex: 1;
-}
-
-button {
-    padding: 10px 15px;
+    padding: 8px;
+    background: #222;
     border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    background: #3a86ff;
     color: white;
-    font-weight: bold;
-    transition: background 0.2s;
 }
-
-button:hover {
-    background: #265ecf;
+.bottom-panel button {
+    margin-left: 10px;
+    padding: 8px 16px;
+    background: #4da6ff;
+    cursor: pointer;
+}
+#imgBtn {
+    margin-left: 6px;
+    padding: 8px 12px;
+    background: #333;
+    border: none;
+    cursor: pointer;
+    color: white;
 }
