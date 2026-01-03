@@ -22,7 +22,9 @@ const sendBtn = document.getElementById("send");
 // анонимный вход
 firebase.auth().signInAnonymously();
 
-// отправка
+// ==================
+// ОТПРАВКА
+// ==================
 function sendMessage() {
     const name = nameInput.value.trim();
     const text = msgInput.value.trim();
@@ -40,16 +42,19 @@ function sendMessage() {
 sendBtn.onclick = sendMessage;
 msgInput.addEventListener("keydown", e => { if(e.key === "Enter") sendMessage(); });
 
-// получение сообщений
+// ==================
+// ПОЛУЧЕНИЕ СООБЩЕНИЙ
+// ==================
 chatRef.limitToLast(100).on("child_added", snap => {
     const data = snap.val();
     const div = document.createElement("div");
     div.className = "message";
 
-    // если текст начинается с http/https и это картинка — показываем как img
-    if (data.text.match(/^https?:\/\/.*\.(jpg|jpeg|png|webp|gif)$/i)) {
+    // Если текст начинается с img: — показываем картинку
+    if (data.text.startsWith("img:")) {
+        const url = data.text.slice(4).trim();
         div.innerHTML = `<b>${data.name}:</b><br>
-                         <img src="${data.text}" width="150" height="150" style="object-fit:cover;border-radius:10px;">`;
+                         <img src="${url}" width="150" height="150" style="object-fit:cover;border-radius:10px;">`;
     } else {
         div.innerHTML = `<b>${data.name}:</b> ${data.text}`;
     }
@@ -58,5 +63,9 @@ chatRef.limitToLast(100).on("child_added", snap => {
     chat.scrollTop = chat.scrollHeight;
 });
 
-// если чат очищен
-chatRef.on("value", snap => { if (!snap.exists()) chat.innerHTML = ""; });
+// ==================
+// ЕСЛИ ЧАТ ОЧИЩЕН
+// ==================
+chatRef.on("value", snap => {
+    if (!snap.exists()) chat.innerHTML = "";
+});
