@@ -22,9 +22,7 @@ const sendBtn = document.getElementById("send");
 // анонимный вход
 firebase.auth().signInAnonymously();
 
-// ==================
-// ОТПРАВКА
-// ==================
+// отправка
 function sendMessage() {
     const name = nameInput.value.trim();
     const text = msgInput.value.trim();
@@ -42,15 +40,13 @@ function sendMessage() {
 sendBtn.onclick = sendMessage;
 msgInput.addEventListener("keydown", e => { if(e.key === "Enter") sendMessage(); });
 
-// ==================
-// ПОЛУЧЕНИЕ СООБЩЕНИЙ
-// ==================
+// получение
 chatRef.limitToLast(100).on("child_added", snap => {
     const data = snap.val();
     const div = document.createElement("div");
     div.className = "message";
 
-    // Если текст начинается с img: — показываем картинку
+    // картинки
     if (data.text.startsWith("img:")) {
         const url = data.text.slice(4).trim();
         div.innerHTML = `<b>${data.name}:</b><br>
@@ -63,9 +59,6 @@ chatRef.limitToLast(100).on("child_added", snap => {
     chat.scrollTop = chat.scrollHeight;
 });
 
-// ==================
-// ЕСЛИ ЧАТ ОЧИЩЕН
-// ==================
 chatRef.on("value", snap => {
     if (!snap.exists()) chat.innerHTML = "";
 });
