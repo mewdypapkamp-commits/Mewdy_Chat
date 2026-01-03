@@ -1,74 +1,112 @@
-// ================= FIREBASE =================
+// Firebase
 const firebaseConfig = {
   apiKey: "AIzaSyAez-DASdgHDoHlfU1lPu6QlgOUCHv7tGE",
   authDomain: "mewdychats.firebaseapp.com",
   databaseURL: "https://mewdychats-default-rtdb.europe-west1.firebasedatabase.app",
   projectId: "mewdychats",
-  storageBucket: "mewdychats.firebasestorage.app",
+  storageBucket: "mewdychats.appspot.com",
   messagingSenderId: "297493755800",
   appId: "1:297493755800:web:bc814f25e9b4f3588a1ded"
 };
 
 firebase.initializeApp(firebaseConfig);
+
 const db = firebase.database();
 const chatRef = db.ref("messages");
-firebase.auth().signInAnonymously();
+const storage = firebase.storage();
+const auth = firebase.auth();
 
-// ================= ELEMENTS =================
+// элементы
 const chat = document.getElementById("chat");
 const nameInput = document.getElementById("username");
 const msgInput = document.getElementById("message");
 const sendBtn = document.getElementById("send");
 const imgBtn = document.getElementById("imgBtn");
+const imageInput = document.getElementById("imageInput");
 
-// ================= SEND =================
+// 🔐 АНОНИМНЫЙ ВХОД
+let currentUID = null;
+
+auth.signInAnonymously().then((user) => {
+    currentUID = user.user.uid;
+    console.log("UID:", currentUID);
+});
+
+// ==================
+// ОТПРАВКА
+// ==================
 function sendMessage() {
     const name = nameInput.value.trim();
     const text = msgInput.value.trim();
+
     if (!name || !text) return;
+
+    // 🧹 КОМАНДА ОЧИСТКИ (ТОЛЬКО АДМИН)
+    if (text === "/clear") {
+        chatRef.remove(); // Firebase сам проверит — админ или нет
+        msgInput.value = "";
+        return;
+    }
 
     chatRef.push({
         name: name,
-        text: text,
-        time: Date.now()
+        type: "text",
+        text: text
     });
 
     msgInput.value = "";
 }
 
-sendBtn.addEventListener("click", sendMessage);
-msgInput.addEventListener("keydown", e => { if (e.key === "Enter") sendMessage(); });
+sendBtn.onclick = sendMessage;
 
-// ================= IMAGE URL =================
-imgBtn.addEventListener("click", () => {
-    const url = prompt("Вставь прямую ссылку на фото (jpg/png/webp):");
-    const name = nameInput.value.trim();
-    if (!url || !name) return;
-
-    chatRef.push({
-        name: name,
-        text: "img:" + url,
-        time: Date.now()
-    });
+msgInput.addEventListener("keydown", (e) => {
+    if (e.key === "Enter") sendMessage();
 });
 
-// ================= RECEIVE =================
-chatRef.limitToLast(100).on("child_added", snapshot => {
-    const data = snapshot.val();
+// ==================
+// КАРТИНКИ
+// ==================
+imgBtn.onclick = () => imageInput.click();
+
+imageInput.onchange = () => {
+    const file = imageInput.files[0];
+    const name = nameInput.value.trim();
+    if (!file || !name) return;
+
+    const ref = storage.ref("images/" + Date.now() + "_" + file.name);
+
+    ref.put(file).then(() => {
+        ref.getDownloadURL().then((url) => {
+            chatRef.push({
+                name: name,
+                type: "image",
+                url: url
+            });
+        });
+    });
+
+    imageInput.value = "";
+};
+
+// ==================
+// ПОЛУЧЕНИЕ
+// ==================
+chatRef.limitToLast(100).on("child_added", (snap) => {
+    const data = snap.val();
     const div = document.createElement("div");
     div.className = "message";
 
-    if (data.text && data.text.startsWith("img:")) {
-        const url = data.text.slice(4).trim();
-        div.innerHTML = `
-            <b>${data.name}:</b><br>
-            <img src="${url}" width="150" height="150"
-                 style="object-fit:cover;border-radius:10px;">
-        `;
+    if (data.type === "image") {
+        div.innerHTML = `<b>${data.name}:</b><br>
+        <img src="${data.url}" width="150" height="150">`;
     } else {
         div.innerHTML = `<b>${data.name}:</b> ${data.text}`;
     }
 
     chat.appendChild(div);
     chat.scrollTop = chat.scrollHeight;
+});
+
+chatRef.on("value", (snap) => {
+    if (!snap.exists()) chat.innerHTML = "";
 });
