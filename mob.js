@@ -19,12 +19,9 @@ const nameInput = document.getElementById("username");
 const msgInput = document.getElementById("message");
 const sendBtn = document.getElementById("send");
 
-// анонимный вход
 firebase.auth().signInAnonymously();
 
-// ==================
-// ОТПРАВКА
-// ==================
+// отправка
 function sendMessage() {
     const name = nameInput.value.trim();
     const text = msgInput.value.trim();
@@ -44,9 +41,7 @@ msgInput.addEventListener("keydown", e => {
     if(e.key === "Enter") sendMessage();
 });
 
-// ==================
-// ПОЛУЧЕНИЕ СООБЩЕНИЙ
-// ==================
+// получение
 chatRef.limitToLast(100).on("child_added", snap => {
     const data = snap.val();
     const div = document.createElement("div");
@@ -65,9 +60,6 @@ chatRef.limitToLast(100).on("child_added", snap => {
     chat.scrollTop = chat.scrollHeight;
 });
 
-// ==================
-// ЕСЛИ ЧАТ ОЧИЩЕН
-// ==================
 chatRef.on("value", snap => {
     if (!snap.exists()) chat.innerHTML = "";
 });
