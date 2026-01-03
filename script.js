@@ -12,25 +12,17 @@ const firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 const db = firebase.database();
 const chatRef = db.ref("messages");
-const auth = firebase.auth();
 
 // элементы
 const chat = document.getElementById("chat");
 const nameInput = document.getElementById("username");
 const msgInput = document.getElementById("message");
 const sendBtn = document.getElementById("send");
-const imgBtn = document.getElementById("imgBtn");
 
-// 🔐 АНОНИМНЫЙ ВХОД
-let currentUID = null;
-auth.signInAnonymously().then((user) => {
-    currentUID = user.user.uid;
-    console.log("UID:", currentUID);
-});
+// анонимный вход
+firebase.auth().signInAnonymously();
 
-// ==================
-// ОТПРАВКА СООБЩЕНИЯ
-// ==================
+// отправка
 function sendMessage() {
     const name = nameInput.value.trim();
     const text = msgInput.value.trim();
@@ -38,44 +30,26 @@ function sendMessage() {
 
     chatRef.push({
         name: name,
-        type: "text",
-        text: text
+        text: text,
+        time: Date.now()
     });
 
     msgInput.value = "";
 }
 
 sendBtn.onclick = sendMessage;
-msgInput.addEventListener("keydown", (e) => {
-    if (e.key === "Enter") sendMessage();
-});
+msgInput.addEventListener("keydown", e => { if(e.key === "Enter") sendMessage(); });
 
-// ==================
-// ОТПРАВКА ФОТО ПО URL
-// ==================
-imgBtn.onclick = () => {
-    const url = prompt("Вставь прямую ссылку на фото (jpg/png/webp):");
-    const name = nameInput.value.trim();
-    if (!url || !name) return;
-
-    chatRef.push({
-        name: name,
-        type: "image",
-        url: url
-    });
-};
-
-// ==================
-// ПОЛУЧЕНИЕ СООБЩЕНИЙ
-// ==================
-chatRef.limitToLast(100).on("child_added", (snap) => {
+// получение сообщений
+chatRef.limitToLast(100).on("child_added", snap => {
     const data = snap.val();
     const div = document.createElement("div");
     div.className = "message";
 
-    if (data.type === "image") {
+    // если текст начинается с http/https и это картинка — показываем как img
+    if (data.text.match(/^https?:\/\/.*\.(jpg|jpeg|png|webp|gif)$/i)) {
         div.innerHTML = `<b>${data.name}:</b><br>
-                         <img src="${data.url}" width="150" height="150" style="object-fit:cover;border-radius:10px;">`;
+                         <img src="${data.text}" width="150" height="150" style="object-fit:cover;border-radius:10px;">`;
     } else {
         div.innerHTML = `<b>${data.name}:</b> ${data.text}`;
     }
@@ -84,9 +58,5 @@ chatRef.limitToLast(100).on("child_added", (snap) => {
     chat.scrollTop = chat.scrollHeight;
 });
 
-// ==================
-// ЕСЛИ ЧАТ ОЧИЩЕН
-// ==================
-chatRef.on("value", (snap) => {
-    if (!snap.exists()) chat.innerHTML = "";
-});
+// если чат очищен
+chatRef.on("value", snap => { if (!snap.exists()) chat.innerHTML = ""; });
