@@ -13,39 +13,61 @@ firebase.initializeApp(firebaseConfig);
 const db = firebase.database();
 const chatRef = db.ref("messages");
 
-firebase.auth().signInAnonymously();
-
-// Elements
+// элементы
 const chat = document.getElementById("chat");
 const nameInput = document.getElementById("username");
 const msgInput = document.getElementById("message");
 const sendBtn = document.getElementById("send");
 
-// SEND MESSAGE
+// анонимный вход
+firebase.auth().signInAnonymously();
+
+// ==================
+// ОТПРАВКА
+// ==================
 function sendMessage() {
-  const name = nameInput.value.trim();
-  const text = msgInput.value.trim();
-  if (!name || !text) return;
+    const name = nameInput.value.trim();
+    const text = msgInput.value.trim();
+    if (!name || !text) return;
 
-  chatRef.push({
-    name,
-    text
-  });
+    chatRef.push({
+        name: name,
+        text: text,
+        time: Date.now()
+    });
 
-  msgInput.value = "";
+    msgInput.value = "";
 }
 
 sendBtn.onclick = sendMessage;
 msgInput.addEventListener("keydown", e => {
-  if (e.key === "Enter") sendMessage();
+    if(e.key === "Enter") sendMessage();
 });
 
-// RECEIVE
+// ==================
+// ПОЛУЧЕНИЕ СООБЩЕНИЙ
+// ==================
 chatRef.limitToLast(100).on("child_added", snap => {
-  const data = snap.val();
-  const div = document.createElement("div");
-  div.className = "message";
-  div.innerHTML = `<b>${data.name}:</b> ${data.text}`;
-  chat.appendChild(div);
-  chat.scrollTop = chat.scrollHeight;
+    const data = snap.val();
+    const div = document.createElement("div");
+    div.className = "message";
+
+    // Если текст начинается с img: — показываем картинку
+    if (data.text.startsWith("img:")) {
+        const url = data.text.slice(4).trim();
+        div.innerHTML = `<b>${data.name}:</b><br>
+                         <img src="${url}" style="width:150px;height:150px;object-fit:cover;border-radius:10px;">`;
+    } else {
+        div.innerHTML = `<b>${data.name}:</b> ${data.text}`;
+    }
+
+    chat.appendChild(div);
+    chat.scrollTop = chat.scrollHeight;
+});
+
+// ==================
+// ЕСЛИ ЧАТ ОЧИЩЕН
+// ==================
+chatRef.on("value", snap => {
+    if (!snap.exists()) chat.innerHTML = "";
 });
