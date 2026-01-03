@@ -10,10 +10,8 @@ const firebaseConfig = {
 };
 
 firebase.initializeApp(firebaseConfig);
-
 const db = firebase.database();
 const chatRef = db.ref("messages");
-const storage = firebase.storage();
 const auth = firebase.auth();
 
 // элементы
@@ -22,31 +20,21 @@ const nameInput = document.getElementById("username");
 const msgInput = document.getElementById("message");
 const sendBtn = document.getElementById("send");
 const imgBtn = document.getElementById("imgBtn");
-const imageInput = document.getElementById("imageInput");
 
 // 🔐 АНОНИМНЫЙ ВХОД
 let currentUID = null;
-
 auth.signInAnonymously().then((user) => {
     currentUID = user.user.uid;
     console.log("UID:", currentUID);
 });
 
 // ==================
-// ОТПРАВКА
+// ОТПРАВКА СООБЩЕНИЯ
 // ==================
 function sendMessage() {
     const name = nameInput.value.trim();
     const text = msgInput.value.trim();
-
     if (!name || !text) return;
-
-    // 🧹 КОМАНДА ОЧИСТКИ (ТОЛЬКО АДМИН)
-    if (text === "/clear") {
-        chatRef.remove(); // Firebase сам проверит — админ или нет
-        msgInput.value = "";
-        return;
-    }
 
     chatRef.push({
         name: name,
@@ -58,38 +46,27 @@ function sendMessage() {
 }
 
 sendBtn.onclick = sendMessage;
-
 msgInput.addEventListener("keydown", (e) => {
     if (e.key === "Enter") sendMessage();
 });
 
 // ==================
-// КАРТИНКИ
+// ОТПРАВКА ФОТО ПО URL
 // ==================
-imgBtn.onclick = () => imageInput.click();
-
-imageInput.onchange = () => {
-    const file = imageInput.files[0];
+imgBtn.onclick = () => {
+    const url = prompt("Вставь прямую ссылку на фото (jpg/png/webp):");
     const name = nameInput.value.trim();
-    if (!file || !name) return;
+    if (!url || !name) return;
 
-    const ref = storage.ref("images/" + Date.now() + "_" + file.name);
-
-    ref.put(file).then(() => {
-        ref.getDownloadURL().then((url) => {
-            chatRef.push({
-                name: name,
-                type: "image",
-                url: url
-            });
-        });
+    chatRef.push({
+        name: name,
+        type: "image",
+        url: url
     });
-
-    imageInput.value = "";
 };
 
 // ==================
-// ПОЛУЧЕНИЕ
+// ПОЛУЧЕНИЕ СООБЩЕНИЙ
 // ==================
 chatRef.limitToLast(100).on("child_added", (snap) => {
     const data = snap.val();
@@ -98,7 +75,7 @@ chatRef.limitToLast(100).on("child_added", (snap) => {
 
     if (data.type === "image") {
         div.innerHTML = `<b>${data.name}:</b><br>
-        <img src="${data.url}" width="150" height="150">`;
+                         <img src="${data.url}" width="150" height="150" style="object-fit:cover;border-radius:10px;">`;
     } else {
         div.innerHTML = `<b>${data.name}:</b> ${data.text}`;
     }
@@ -107,6 +84,9 @@ chatRef.limitToLast(100).on("child_added", (snap) => {
     chat.scrollTop = chat.scrollHeight;
 });
 
+// ==================
+// ЕСЛИ ЧАТ ОЧИЩЕН
+// ==================
 chatRef.on("value", (snap) => {
     if (!snap.exists()) chat.innerHTML = "";
 });
