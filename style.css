@@ -1,101 +1,120 @@
 body {
     margin: 0;
     font-family: Arial, sans-serif;
-    background: #111;
-    color: white;
+    background: #f2f2f2;
+    color: #000;
 }
+
 header{
-  background: #e5e5e5;
-  height: 60px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-  border-bottom:2px solid green;
-  color: black;
+    background: #ffffff;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    border-bottom: 2px solid #4da6ff;
+    color: black;
 }
+
 header p{
     position: absolute;
-    color: black;
-    left:5px;
+    left: 10px;
 }
+
 .buttons {
-  position: absolute;
-  right: 15px;
-  display: flex;
-  gap: 10px;
+    position: absolute;
+    right: 15px;
+    display: flex;
+    gap: 10px;
 }
-.buttons a{
-    border:2px solid black;
+
+.buttons a,
+.buttons button {
+    background: #eaeaea;
+    padding: 5px 12px;
+    border-radius: 10px;
+    cursor: pointer;
+    border: 1px solid #999;
+    color: black;
 }
-.buttons a , button {
-  background: #ccc;
-  padding: 5px 12px;
-  border-radius: 10px;
-  cursor: pointer;
-}
-.buttons a:hover{
-    background-color: black;
+
+.buttons a:hover,
+.buttons button:hover {
+    background: #4da6ff;
     color: white;
 }
-.buttons button:hover{
-    background-color: black;
-    color: white;
-}
+
 .chat-container {
     display: grid;
     grid-template-columns: 1fr 220px;
     grid-template-rows: 1fr 70px;
     height: 100vh;
 }
+
 main{
     background: #ffffff;
 }
+
 .chat-window {
     padding: 10px;
     overflow-y: auto;
-    background: #1c1c1c;
+    background: #f9f9f9;
+    border-right: 1px solid #ddd;
 }
+
 .message {
     margin-bottom: 6px;
 }
+
 .message b {
-    color: #4da6ff;
+    color: #1a73e8;
 }
+
 .side-panel {
     padding: 10px;
-    background: #181818;
+    background: #f0f0f0;
+    border-left: 1px solid #ddd;
 }
+
 .side-panel input {
     width: 100%;
     padding: 8px;
-    background: #222;
-    color: white;
+    background: #ffffff;
+    color: black;
+    border: 1px solid #ccc;
 }
+
 .bottom-panel {
     grid-column: 1 / 3;
     display: flex;
     padding: 10px;
-    background: #181818;
+    background: #eeeeee;
+    border-top: 1px solid #ccc;
 }
+
 .bottom-panel input {
     flex: 1;
     padding: 8px;
-    background: #222;
-    border: none;
-    color: white;
+    background: #ffffff;
+    border: 1px solid #ccc;
+    color: black;
 }
+
 .bottom-panel button {
     margin-left: 10px;
     padding: 8px 16px;
     background: #4da6ff;
+    color: white;
+    border: none;
     cursor: pointer;
+    border-radius: 6px;
 }
+
 #imgBtn {
     margin-left: 6px;
     padding: 8px 12px;
-    background: #333;
-    border: none;
+    background: #dddddd;
+    border: 1px solid #ccc;
     cursor: pointer;
-    color: white;
+    color: black;
 }
