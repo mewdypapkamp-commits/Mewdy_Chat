@@ -26,47 +26,48 @@ header p{
 .main{
     display:flex;
     justify-content:center;
-    align-items:stretch; /* важно */
+    align-items:stretch;
     gap:80px;
     min-height:70vh;
     padding:40px 20px;
 }
 
-/* КАРТОЧКА */
+/* КАРТОЧКА МЕНЬШЕ */
 .card{
-    width:260px;
-    height: 100px;
+    width:240px;
+    height:260px; /* уменьшили высоту */
     background:white;
     border-radius:20px;
-    box-shadow:0 10px 25px rgba(0,0,0,0.08);
+    box-shadow:0 8px 20px rgba(0,0,0,0.08);
     display:flex;
     flex-direction:column;
     align-items:center;
-    padding:30px 20px;
+    padding:20px;
 }
 
-/* КАРТИНКА */
+/* КАРТИНКА БОЛЬШЕ */
 .card img{
-    width:110px;
-    margin-bottom:20px;
+    width:140px; /* увеличили */
+    margin-bottom:15px;
 }
 
 /* КНОПКА */
 .btn{
-    margin-top:auto; /* ← это фиксирует кнопки на одном уровне */
-    padding:12px 35px;
+    margin-top:auto;
+    padding:10px 30px;
     border:none;
     border-radius:25px;
     background:linear-gradient(135deg,#4da3ff,#2f80ed);
     color:white;
-    font-size:16px;
+    font-size:15px;
     cursor:pointer;
     transition:0.3s;
 }
 
 .btn:hover{
-    box-shadow:0 0 15px rgba(47,128,237,0.5);
+    box-shadow:0 0 12px rgba(47,128,237,0.4);
 }
+
 
 
 footer{
