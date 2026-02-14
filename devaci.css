@@ -9,7 +9,7 @@ header{
     padding:25px;
     background:white;
     box-shadow:0 2px 10px rgba(0,0,0,0.05);
-    border-bottom: 2px solid #4DA3FF;
+    border-bottom:2px solid #4DA3FF;
 }
 
 header h1{
@@ -27,12 +27,12 @@ header p{
     display:flex;
     justify-content:center;
     align-items:stretch;
-    gap:80px;
+    gap:60px;
     min-height:70vh;
     padding:40px 20px;
 }
 
-/* КАРТОЧКА МЕНЬШЕ */
+/* КАРТОЧКИ */
 .card{
     width:240px;
     height:260px;
@@ -43,7 +43,7 @@ header p{
     flex-direction:column;
     align-items:center;
     padding:20px;
-    transition:0.25s ease; /* ← ОБЯЗАТЕЛЬНО */
+    transition:0.25s ease;
     cursor:pointer;
 }
 
@@ -52,15 +52,12 @@ header p{
     box-shadow:0 16px 35px rgba(0,0,0,0.14);
 }
 
-}
-
-/* КАРТИНКА БОЛЬШЕ */
 .card img{
-    width:140px; /* увеличили */
+    width:140px;
     margin-bottom:15px;
 }
 
-/* КНОПКА */
+/* КНОПКИ */
 .btn{
     margin-top:auto;
     padding:10px 30px;
@@ -77,8 +74,29 @@ header p{
     box-shadow:0 0 12px rgba(47,128,237,0.4);
 }
 
+/* ПАНЕЛЬ СПРАВА */
+.right-panel{
+    width:300px;
+    height:260px;
+    background:white;
+    border-radius:20px;
+    box-shadow:0 8px 20px rgba(0,0,0,0.08);
+    padding:25px;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+}
 
+.right-panel h2{
+    margin:0 0 10px 0;
+    font-size:20px;
+}
 
+.right-panel p{
+    font-size:14px;
+    color:#666;
+    line-height:1.5;
+}
 
 footer{
     text-align:center;
@@ -86,24 +104,3 @@ footer{
     font-size:14px;
     color:#666;
 }
-/* ПАНЕЛЬ СПРАВА (НЕ карточка) */
-.info-panel{
-    width:320px;
-    background:white;
-    border-radius:20px;
-    padding:25px;
-    box-shadow:0 8px 20px rgba(0,0,0,0.08);
-    border-left:4px solid #4DA3FF;
-}
-
-.info-panel h2{
-    margin-top:0;
-    font-size:22px;
-}
-
-.info-panel p{
-    color:#666;
-    font-size:15px;
-    line-height:1.6;
-}
-
