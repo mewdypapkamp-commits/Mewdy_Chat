@@ -76,7 +76,7 @@ header p{
 
 /* ПАНЕЛЬ СПРАВА */
 .right-panel{
-    width:300px;
+    width:200px;
     height:260px;
     background:white;
     border-radius:20px;
