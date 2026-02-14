@@ -1,36 +1,37 @@
-<!DOCTYPE html>
-<html lang="ru">
-<head>
+
+
+<html>
+    <head>
     <meta name="google-site-verification" content="IZq_4Y9JjlFNB4BoNWazonzDGJWlx7oOD96Azbn0jwc" />
     <meta charset="UTF-8">
     <title>Mewdy_Chat</title>
-    <link rel="stylesheet" href="style.css">
-</head>
+    <link rel="stylesheet" href="style.css">  
+    </head>
 <body>
- <header>
-     <p>Mewdy_Chats version: 0.9 beta </p>
 
+<header>
+    <div class="left">Mewdy_Chats version: 0.9 beta</div>
+    <div class="center">Mewdy_Chats</div>
+</header>
 
-    <h1>Mewdy_Chats</h1>
-     <div class="buttons">
-      <a href="rule.html">Rule</a>
-      <button>⚙</button>
-    </div>
-  </header>
-<main class="chat-container">
-    <div id="chat" class="chat-window"></div>
+<div class="chat-container">
 
-    <div class="side-panel">
-        <input type="text" id="username" placeholder="Name">
+    <div class="chat-messages">
+        <!-- сообщения -->
     </div>
-    <div class="bottom-panel">
-        <input type="text" id="message" placeholder="Mesage">
-        <button id="send">Enter</button>
+
+    <div class="chat-sidebar">
+        <input type="text" placeholder="Name">
+        <input type="password" placeholder="Password">
     </div>
-</main>
-<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
-<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
-<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
-<script src="script.js"></script>
+
+</div>
+
+<div class="chat-input">
+    <input type="text" placeholder="Type message...">
+    <button>Enter</button>
+</div>
+
 </body>
 </html>
+
