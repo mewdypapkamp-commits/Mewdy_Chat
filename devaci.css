@@ -86,22 +86,24 @@ footer{
     font-size:14px;
     color:#666;
 }
-/* КАРТОЧКА С ТЕКСТОМ СПРАВА */
-.info-card{
-    width:300px;
-    height:260px;
-    align-items:flex-start;
-    text-align:left;
+/* ПАНЕЛЬ СПРАВА (НЕ карточка) */
+.info-panel{
+    width:320px;
+    background:white;
+    border-radius:20px;
+    padding:25px;
+    box-shadow:0 8px 20px rgba(0,0,0,0.08);
+    border-left:4px solid #4DA3FF;
 }
 
-.info-card h2{
-    margin:0 0 10px 0;
-    font-size:20px;
+.info-panel h2{
+    margin-top:0;
+    font-size:22px;
 }
 
-.info-card p{
-    font-size:14px;
+.info-panel p{
     color:#666;
-    line-height:1.5;
+    font-size:15px;
+    line-height:1.6;
 }
 
