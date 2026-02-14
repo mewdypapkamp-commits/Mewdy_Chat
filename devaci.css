@@ -86,3 +86,22 @@ footer{
     font-size:14px;
     color:#666;
 }
+/* КАРТОЧКА С ТЕКСТОМ СПРАВА */
+.info-card{
+    width:300px;
+    height:260px;
+    align-items:flex-start;
+    text-align:left;
+}
+
+.info-card h2{
+    margin:0 0 10px 0;
+    font-size:20px;
+}
+
+.info-card p{
+    font-size:14px;
+    color:#666;
+    line-height:1.5;
+}
+
