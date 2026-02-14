@@ -35,7 +35,7 @@ header p{
 /* КАРТОЧКА МЕНЬШЕ */
 .card{
     width:240px;
-    height:260px; /* уменьшили высоту */
+    height:260px;
     background:white;
     border-radius:20px;
     box-shadow:0 8px 20px rgba(0,0,0,0.08);
@@ -43,6 +43,15 @@ header p{
     flex-direction:column;
     align-items:center;
     padding:20px;
+    transition:0.25s ease; /* ← ОБЯЗАТЕЛЬНО */
+    cursor:pointer;
+}
+
+.card:hover{
+    transform:translateY(-6px) scale(1.03);
+    box-shadow:0 16px 35px rgba(0,0,0,0.14);
+}
+
 }
 
 /* КАРТИНКА БОЛЬШЕ */
