@@ -97,3 +97,7 @@ header .center{
 .chat-input button:hover{
     background:#2f80ed;
 }
+a:hover{
+    transform:translateY(-6px) scale(1.03);
+    box-shadow:0 0 12px rgba(47,128,237,0.4);
+}
