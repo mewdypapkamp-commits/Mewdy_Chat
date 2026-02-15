@@ -28,7 +28,7 @@
 /* Правая часть с картинкой */
 .reg-image{
     flex:1;
-    background:url("YOUR_IMAGE.jpg") center/cover no-repeat;
+    background:url("Not_maks.png") center/cover no-repeat;
 }
 
 /* Заголовок */
