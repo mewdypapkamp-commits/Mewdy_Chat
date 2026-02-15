@@ -1,0 +1,83 @@
+/* ===== Регистрация ===== */
+
+.reg-body{
+    margin:0;
+    height:100vh;
+    font-family:'Segoe UI', sans-serif;
+}
+
+/* Главный контейнер */
+.reg-wrapper{
+    display:flex;
+    height:100vh;
+    width:100%;
+}
+
+/* Левая панель */
+.reg-panel{
+    width:40%;
+    min-width:380px;
+    background:#f4f6f9;
+    padding:60px;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    border-right:4px solid #4DA3FF;
+}
+
+/* Правая часть с картинкой */
+.reg-image{
+    flex:1;
+    background:url("YOUR_IMAGE.jpg") center/cover no-repeat;
+}
+
+/* Заголовок */
+.reg-panel h1{
+    margin:0;
+    font-size:32px;
+    font-weight:600;
+}
+
+.reg-panel p{
+    margin:10px 0 35px 0;
+    color:#777;
+}
+
+/* Поля */
+.reg-panel input{
+    width:100%;
+    padding:14px 18px;
+    margin-bottom:18px;
+    border-radius:6px;
+    border:3px solid #1c8bc3;
+    font-size:14px;
+    font-family:'Segoe UI', sans-serif;
+}
+
+/* Кнопка */
+.reg-panel .btn{
+    width:70%;
+    padding:12px;
+    border:none;
+    border-radius:25px;
+    background:linear-gradient(135deg,#4da3ff,#2f80ed);
+    color:white;
+    font-size:15px;
+    cursor:pointer;
+    transition:0.3s;
+}
+
+.reg-panel .btn:hover{
+    box-shadow:0 0 12px rgba(47,128,237,0.4);
+}
+
+/* Стрелка */
+.back-arrow{
+    position:absolute;
+    top:20px;
+    left:20px;
+    font-size:26px;
+    text-decoration:none;
+    color:#2f80ed;
+    font-weight:bold;
+}
