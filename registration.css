@@ -29,6 +29,8 @@
 .reg-image{
     flex:1;
     background:url("Not_maks.png") center/cover no-repeat;
+    filter: blur(3px); 
+    z-index: -1;
 }
 
 /* Заголовок */
@@ -65,9 +67,6 @@
     font-size:15px;
     cursor:pointer;
     transition:0.3s;
-
-    filter: blur(5px); 
-    z-index: -1;
 }
 
 .reg-panel .btn:hover{
